@@ -1,17 +1,13 @@
 # Uses python3
 import sys
 
+
 def get_fibonacci_last_digit_naive(n):
-    if n <= 1:
-        return n
+    fib_num = [0, 1]
+    for i in range(1, n):
+        fib_num.append((fib_num[i] + fib_num[i - 1]) % 10)
+    return fib_num[n]
 
-    previous = 0
-    current  = 1
-
-    for _ in range(n - 1):
-        previous, current = current, previous + current
-
-    return current % 10
 
 if __name__ == '__main__':
     input = sys.stdin.read()
