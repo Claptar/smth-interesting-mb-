@@ -1,21 +1,34 @@
 # Uses python3
 import sys
 
-def optimal_sequence(n):
-    sequence = []
-    while n >= 1:
-        sequence.append(n)
-        if n % 3 == 0:
-            n = n // 3
-        elif n % 2 == 0:
-            n = n // 2
-        else:
-            n = n - 1
-    return reversed(sequence)
 
-input = sys.stdin.read()
-n = int(input)
-sequence = list(optimal_sequence(n))
-print(len(sequence) - 1)
-for x in sequence:
+def optimal_sequence(m):
+    a = [0] * (m + 1)
+    b = [0] * (m + 1)
+    for num in range(2, m + 1):
+        min_k_num = m
+        last_num = m
+        if a[num - 1] + 1 < min_k_num:
+            min_k_num = a[num - 1] + 1
+            last_num = num - 1
+        if num % 2 == 0 and a[num // 2] + 1 < min_k_num:
+            min_k_num = a[num // 2] + 1
+            last_num = num // 2
+        if num % 3 == 0 and a[num // 3] + 1 < min_k_num:
+            min_k_num = a[num // 3] + 1
+            last_num = num // 3
+        a[num] = min_k_num
+        b[num] = last_num
+    c = []
+    i = m
+    while i > 0:
+        c.append(i)
+        i = b[i]
+    return a[m], c[::-1]
+
+
+n = int(input())
+k, c = optimal_sequence(n)
+print(k)
+for x in c:
     print(x, end=' ')
