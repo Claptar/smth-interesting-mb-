@@ -10,6 +10,19 @@ def evalt(a, b, op):
         assert False
 
 
+def maxmin(num, op, M, m, i , j):
+    mini =  max(num) ** (len(num) // 2)
+    maxi = - max(num) ** (len(num) // 2)
+    for k in range(i, j):
+        eq1 = evalt(M[i][k], M[k + 1][j], op[k])
+        eq2 = evalt(M[i][k], m[k + 1][j], op[k])
+        eq3 = evalt(m[i][k], M[k + 1][j], op[k])
+        eq4 = evalt(m[i][k], m[k + 1][j], op[k])
+        mini = min(mini, eq1, eq2, eq3, eq4)
+        maxi = max(maxi, eq1, eq2, eq3, eq4)
+    return mini, maxi
+
+
 def get_maximum_value(num, op):
     n = len(num)
     M = [[0] * n for i in range(n)]
@@ -19,13 +32,8 @@ def get_maximum_value(num, op):
         m[i][i] = num[i]
     for i in range(1, n):
         for j in range(n - i):
-            eq1 = evalt(M[j][i + j - 1], M[j + 1][i + j], op[i - 1 +j])
-            eq2 = evalt(m[j][i + j - 1], M[j + 1][i + j], op[i - 1 +j])
-            eq3 = evalt(M[j][i + j - 1], m[j + 1][i + j], op[i - 1 +j])
-            eq4 = evalt(m[j][i + j - 1], m[j + 1][i + j], op[i - 1 +j])
-            M[j][i + j] = max(eq1, eq2, eq3, eq4)
-            m[j][i + j] = min(eq1, eq2, eq3, eq4)
-    return M, m
+            m[j][i + j], M[j][i + j] = maxmin(num, op, M, m, j, i + j)
+    return M[0][len(num) - 1]
 
 
 def dataset_conv(dataset):
@@ -40,6 +48,6 @@ def dataset_conv(dataset):
 
 
 if __name__ == "__main__":
-    dataset = '5-8+7*4-8+9'
+    dataset = input()
     num, op = dataset_conv(dataset)
     print(get_maximum_value(num, op))

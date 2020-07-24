@@ -18,7 +18,6 @@ def Score(motifs):
     return score
 
 
-import random
 def random_motif_genetator(dna, k):
     motifs = []
     for string in dna:
