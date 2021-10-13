@@ -1,0 +1,39 @@
+#!/bin/bash
+#n1 -eq n2Возвращает истинное значение, если n1 равно n2.
+#n1 -ge n2 Возвращает истинное значение, если n1больше или равно n2.
+#n1 -gt n2Возвращает истинное значение, если n1 больше n2.
+#n1 -le n2Возвращает истинное значение, если n1меньше или равно n2.
+#n1 -lt n2Возвращает истинное значение, если n1 меньше n2.
+#n1 -ne n2Возвращает истинное значение, если n1не равно n2.
+
+val1=6
+if [ $val1 -gt 5 ]
+then
+  echo "The test value $val1 is grater than 5"
+else
+  echo "The test value $val1 is not greater than 5"
+fi
+
+#str1 = str2 Проверяет строки на равенство, возвращает истину, если строки идентичны.
+#str1 != str2Возвращает истину, если строки не идентичны.
+#str1 < str2Возвращает истину, если str1меньше, чем str2.
+#str1 > str2 Возвращает истину, если str1больше, чем str2.
+#-n str1 Возвращает истину, если длина str1больше нуля.
+#-z str1Возвращает истину, если длина str1равна нулю.
+
+user="user241"
+if [ $user = $USER ]
+then
+  echo "The user $user is the current logged user"
+fi
+
+val1=text
+val2="another text"
+if [ $val1 \> "$val2" ]
+then
+  echo "$val1 is greater than $val2"# shellcheck disable=SC1009
+else
+  echo "$val1 is less than $val2"
+fi
+
+
