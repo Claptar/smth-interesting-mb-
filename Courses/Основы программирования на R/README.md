@@ -1,0 +1,1 @@
+Задания из [курса](https://stepik.org/course/497/syllabus) на Stepik
